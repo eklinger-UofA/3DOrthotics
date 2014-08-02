@@ -1,0 +1,32 @@
+Install Git:
+
+To install Git on a unix-based operating system, the simplest way is to complle
+from source. Dmg files are available for installation on mac os X, but these 
+may not work on older versions. To begin, download the appropriate zipped tar
+archive from https://www.kernel.org/pub/software/scm/git/. Unzip and unarchive
+the file, move into the created directory.
+
+Many installation options exist, the simplest is:
+
+$ make prefix=/usr all doc info
+# make prefix=/usr install install-doc install-html install-info 
+
+Note that any commands preceeded by a hash mark will need to be run either as
+root, or with sudo privileges.
+
+Another option is to setup a more personalized autoconf:
+
+$ make configure
+$ ./configure --prefix=/usr
+$ make all doc
+# make install install-doc install-html
+
+Alternatively, though not necessarily recommended, you may run git without
+installing it by setting path variables to the executables:
+
+$ GIT_EXEC_PATH=`pwd`
+$ PATH=`pwd`:$PATH
+$ GITPERLLIB=`pwd`/perl/blib/lib
+$ export GIT_EXEC_PATH PATH GITPERLLIB
+
+
