@@ -1,0 +1,112 @@
+DB scheme for app:
+
+Hi Danny, below is the rough idea i have for the DB scheme from our talk on the weekend, I have done some research so far this week on alternative providers for web hosting, looking as prices and guarenteed uptime. Stuff like that. I have found some interesting alternatives and once i have a few i can present them to you and we pick one. I think i will be able to have something deployed that you can visit and start looking at mid August or so. 
+
+Scheme:
+
+Table: Client
+Fields:
+First Name
+Last Name
+Address
+Phone #
+Cell #
+Email
+Birthdate
+Credit (current credit from insurance company)
+Notes (for log of communication)
+Dependants - another table
+Prescriptions - another table
+Insurance - another table
+
+Table: Dependants
+Relationship (spouse, son, daughter)
+Birthdate
+Sex
+
+* Each client will have a list of dependents that they are associate with.
+
+Table Prescriptions:
+Fields:
+Client
+Date scanned
+Prescription image
+
+Table: Insurance
+Fields:
+Husband and Wife’s coverage (there could be multiple policies)
+Provider
+Policy #
+Contract #
+coverage %
+Benefit year (when the insurers benefit period renews):
+1) Calendar Year (Jan 1)
+2) could be a specific month in the year 
+Example: April 1
+
+Direct/indirect billing
+coverage conditions
+
+Table: Invoicing
+Fields:
+Invoice #
+Date created
+Date submitted
+Saved invoices
+
+Table: Orders
+Fields:
+Order type (orthotics, shoes, etc)
+Client (or their dependant)
+order date
+arrival date
+dispensing date
+Reports: to place orders for orthotics, compression stockings, shoes
+-Orders for ortho, comp and shoes will not be ordered on the spot so we will to have a report the let’s us know when we have placed the order and when we actually submitted the order.
+
+* This is an important table, i want to know as much as i can about the reports you want to generate to make sure we ahve all the fields we will need in here.
+
+* using shoes as a first example
+Table: Inventory
+Fields:
+Brand
+Name of shoe
+Style
+SKU
+size
+Color
+Price
+notes/details
+Reports: 
+1)how much shoes that is in inventory
+    - separate by Brands, style, sku
+    2)how much money is invested in inventory
+        -separate by brands, style, sku
+        3)Best sellers
+        4)best sizes sellers
+        5)size curve
+        6) low inventory notifications
+            - sent by notification can be sent by email
+                
+
+                Table: Claims
+                Fields:
+                Submitted date
+                invoice date
+                paid date
+                client/dependant
+                insurance
+                amount claimed
+                expected back
+                payment type (cash, cheque, credit)
+                Reports:
+                1) Outstanding Payments
+                - 15/30/60/90 day cycle (insurance company “Direct billing”/patient “Non-direct billing”)
+                - Paid claims 15/30/60/90 days (or possibly if we can have a have a calendar where we can pick from a specific start date to and end date)
+                2) Paid claims 15/30/60/90 days (or possibly if we can have a have a calendar where we can pick from a specific start date to and end date)
+                3) Monthly breakdown of revenue
+                    - amount invoiced, amount expected, amount actually paid (possibly a graph, or a table)
+
+
+
+
