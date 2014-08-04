@@ -37,12 +37,12 @@ TEMPLATE_DIRS = (
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admin',
     'clients',
 )
 
@@ -91,6 +91,8 @@ STATIC_PATH = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    STATIC_PATH
-)
+# TODO add this back, just missing the location of default django static files
+# makes the admin page look crappy if this is included now
+#STATICFILES_DIRS = (
+#    STATIC_PATH
+#)
