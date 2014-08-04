@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-PROJECT_PATH = os.path.join(BASE_DIR, os.pardir)
-PROJECT_PATH = os.pathabspath(PROJECT_PATH)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -23,16 +21,18 @@ SECRET_KEY = '8f4!@*b0wr4u0mfc1d007l&s@w^%2t$!jx4w-vv_z2uc&i+lw)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = []
+
+# Tempalte stuff
+
 TEMPLATE_DEBUG = True
-TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
+TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 
 TEMPLATE_DIRS = (
     # Put strings here like "/home/html/django_templates"
     # Don't forget to use absolute paths, not relative paths
     TEMPLATE_PATH,
 )
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
