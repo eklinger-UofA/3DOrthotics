@@ -4,8 +4,8 @@
 Authors
 =======
 
-Eric Klinger
-Chris Klinger
+*   Eric Klinger
+*   Chris Klinger
 
 Overview
 ========
