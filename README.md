@@ -22,3 +22,5 @@ For starters, here is a markdown cheatsheet for editing this README:
 If you add .pyc files by accident this gets rid of them:
 *   http://yuji.wordpress.com/2010/10/29/git-remove-all-pyc/
 
+Problems with regular expressions? Here try this:
+*   http://www.cheatography.com/davechild/cheat-sheets/regular-expressions/
