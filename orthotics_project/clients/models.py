@@ -11,6 +11,7 @@ from django.db import models
 
 
 class Client(models.Model):
+
     """Model of a client.
 
     A client will have the following fields:
@@ -29,6 +30,7 @@ class Client(models.Model):
     Insurance - another table
 
     """
+
     MALE = 'M'
     FEMALE = 'F'
     GENDER_CHOICES = ((MALE, 'Male'),
@@ -63,6 +65,7 @@ class Client(models.Model):
 
 
 class Perscription(models.Model):
+
     """Model of a saved perscription file.
 
     A perscription will have the following fields:
@@ -70,7 +73,11 @@ class Perscription(models.Model):
     Date added
     Prescription image
 
+    Notes:
+    Reporting:
+
     """
+
     client = models.ForeignKey(Client)
     dateAdded = models.DateTimeField(auto_now_add=True)
     # TODO file field for uploading and saving the perscription, optional for now
@@ -85,9 +92,10 @@ class Perscription(models.Model):
 
 
 class Insurance(models.Model):
-    """
-    Table: Insurance
-    Fields:
+
+    """Model of a insurance coverage a client has.
+
+    Insurance will have the following fields:
     Husband and Wifes coverage (there could be multiple policies)
     Provider
     Policy #
@@ -100,10 +108,17 @@ class Insurance(models.Model):
 
     Direct/indirect billing
     coverage conditions
+    Notes:
+    Reporting:
+
     """
 
+    pass
 
-    """
+class Claim(models.Model):
+
+    """Model of a claim submitted for a clients.
+
     Table: Claims
     Fields:
     Submitted date
@@ -115,4 +130,5 @@ class Insurance(models.Model):
     expected back
     payment type (cash, cheque, credit)
     Look up report types from google docs
+
     """
