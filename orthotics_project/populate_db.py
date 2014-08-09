@@ -7,6 +7,7 @@ def populate():
     MALE = Client.GENDER_CHOICES[0][0]
     FEMALE = Client.GENDER_CHOICES[1][0]
     add_client("Eric", "Klinger", "11408 44 ave", datetime.date(1988, 12, 30), MALE)
+    add_client("Chris", "Klinger", "11408 44 ave", datetime.date(1991, 6, 14), MALE)
 
 def add_model():
     # use object.get_or_create here and take the 0th index [0]

@@ -35,18 +35,18 @@ class Client(models.Model):
     firstName = models.CharField(max_length=128)
     lastName = models.CharField(max_length=128)
     address = models.CharField(max_length=128)
-    # TODO Write validators for the phonenumbers below
-    phoneNumber = models.CharField(max_length=14, blank=True, null=True) # In the form of (780)-937-1514
-    cellNumber = models.CharField(max_length=14, blank=True, null=True) # In the form of (780)-937-1514
-    email = models.EmailField(max_length=254, blank=True, null=True) # will cover all RFC3696/5321-compliant email addresses
+    # TODO Write validators for the phone numbers below
+    phoneNumber = models.CharField(max_length=14, blank=True, null=True)  # In the form of (780)-937-1514
+    cellNumber = models.CharField(max_length=14, blank=True, null=True)  # In the form of (780)-937-1514
+    email = models.EmailField(max_length=254, blank=True, null=True)  # will cover all RFC3696/5321-compliant email addresses
     birthdate = models.DateField()
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     credit = models.SmallIntegerField(default=0)
-# insurance (foreign key)
-# dependants (foreign key)
-# Perscriptions (foreign key)
-# invoices (foreign key)
-# claims (foreign key)
+    # insurance (foreign key)
+    # dependants (foreign key)
+    # Perscriptions (foreign key)
+    # invoices (foreign key)
+    # claims (foreign key)
 
     def __unicode__(self):
         return self.firstName + " - " + self.lastName
