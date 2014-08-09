@@ -42,7 +42,8 @@ class Client(models.Model):
     # TODO Write validators for the phone numbers below
     phoneNumber = models.CharField(max_length=14, blank=True, default="")  # In the form of (780)-937-1514
     cellNumber = models.CharField(max_length=14, blank=True, default="")  # In the form of (780)-937-1514
-    email = models.EmailField(max_length=254, blank=True, null=True)  # will cover all RFC3696/5321-compliant email addresses
+    # will cover all RFC3696/5321-compliant email addresses
+    email = models.EmailField(max_length=254, blank=True, null=True)
     birthdate = models.DateField()
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     credit = models.SmallIntegerField(default=0)
@@ -96,7 +97,6 @@ class Insurance(models.Model):
     """Model of a insurance coverage a client has.
 
     Insurance will have the following fields:
-    Husband and Wifes coverage (there could be multiple policies)
     Provider
     Policy #
     Contract #
@@ -107,20 +107,35 @@ class Insurance(models.Model):
     Example: April 1
 
     Direct/indirect billing
-    coverage conditions
+
     Notes:
+    coverage conditions
+    Husband and Wifes coverage (there could be multiple policies)
     Reporting:
 
     """
 
-    pass
+    client = models.ForeignKey(Client)
+    provider = models.CharField(max_length=128)
+    policyNumber = models.CharField(max_length=128)
+    contractNumber = models.CharField(max_length=128)
+    coveragePercent = models.IntegerField()
+    coverageMax = models.IntegerField(blank=True, default=0)
+    coverageRemaining = models.IntegerField(blank=True, default=0)
+
+    def __unicode__(self):
+        clientName = self.client.firstName + " " + self.client.lastName
+        return "Insurance - %s - %s" % (clientName, self.provider)
+
+    def __str__(self):
+        return self.__unicode__()
+
 
 class Claim(models.Model):
 
     """Model of a claim submitted for a clients.
 
-    Table: Claims
-    Fields:
+    Claims will have the following fields:
     Submitted date
     invoice date
     paid date
@@ -132,3 +147,18 @@ class Claim(models.Model):
     Look up report types from google docs
 
     """
+
+    PAYMENT_CHOICES = (("CASH", "Cash"),
+                       ("CHEQUE", "Cheque"),
+                       ("CREDIT", "Credit"))
+
+    client = models.ForeignKey(Client)
+    # TODO figure out how to get the insurance from the client to calidate this
+    insurance = models.ForeignKey(Insurance)
+    submittedDate = models.DateTimeField(auto_now=True)
+    invoiceDate = models.DateTimeField(blank=True, null=True)
+    paidDate = models.DateTimeField(blank=True, null=True)
+    amountClaimed = models.IntegerField(blank=True, default=0)
+    # TODO validate based on clients insurance, amount left in coverage and coverage percent
+    expectedBack = models.IntegerField(blank=True, default=0)
+    paymentType = models.CharField(max_length=6, choices=PAYMENT_CHOICES)
