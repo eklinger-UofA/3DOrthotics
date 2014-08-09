@@ -1,4 +1,4 @@
-"""Models for the inventory app
+"""Models for the inventory app.
 
 The following tables will be contained within:
 - Inventory
