@@ -2,8 +2,8 @@
 
 The following tables will be contained within:
 - Client
-- Prescriptions
 - Insurance
+- Prescriptions
 - Claims
 
 """
@@ -11,7 +11,7 @@ from django.db import models
 
 
 class Client(models.Model):
-    """Model of a client in our system
+    """Model of a client.
 
     A client will have the following fields:
     First Name
@@ -27,6 +27,7 @@ class Client(models.Model):
     Dependants - another table
     Prescriptions - another table
     Insurance - another table
+
     """
     MALE = 'M'
     FEMALE = 'F'
@@ -62,12 +63,13 @@ class Client(models.Model):
 
 
 class Perscription(models.Model):
-    """
-    Table Prescriptions:
-    Fields:
+    """Model of a saved perscription file.
+
+    A perscription will have the following fields:
     Client
     Date added
     Prescription image
+
     """
     client = models.ForeignKey(Client)
     dateAdded = models.DateTimeField(auto_now_add=True)
@@ -81,6 +83,8 @@ class Perscription(models.Model):
     def __str__(self):
         return self.__unicode__()
 
+
+class Insurance(models.Model):
     """
     Table: Insurance
     Fields:
