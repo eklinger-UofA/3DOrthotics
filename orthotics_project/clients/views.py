@@ -13,4 +13,9 @@ def index(request):
 
 
 def clientView(request, client_id):
-    return HttpResponse("Welcome to this client's page")
+    context = RequestContext(request)
+
+    client = Client.objects.get(id=client_id)
+    context_dict = {'client': client}
+
+    return render_to_response('clients/client.html', context_dict, context)

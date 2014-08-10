@@ -10,6 +10,10 @@
             <ul>
                 {% for client in clients %}
                 <h3><a href="/clients/{{client.id}}">{{client.firstName}} {{client.lastName}}</a></h3>
+                <ul>
+                    <li>{{client.address}}</li>
+                    <li>{{client.birthdate}}</li>
+                </ul>
                 {% endfor %}
             </ul>
         {% else %}
