@@ -42,10 +42,25 @@ def populate():
     add_claim(jane, jane_insurance, timezone.now(), CASH)
     add_claim(john, john_insurance, timezone.now(), CASH)
 
+    # Add admin users
+    add_admin("admin", "admin")
+    add_admin("jay", "admin")
+    add_admin("dan", "admin")
+    add_admin("eric", "admin")
+    add_admin("chris", "admin")
+
 
 def add_model_example():
     # use <model>.objects.get_or_create here and take the 0th index [0]
     pass
+
+
+def add_admin(username, password):
+    a = User.objects.get_or_create(username=username,
+                                   password=password,
+                                   is_staff=True,
+                                   is_superuser=True)
+    return a[0]
 
 
 def add_client(firstName, lastName, address, birthdate, gender):
@@ -85,6 +100,7 @@ if __name__ == '__main__':
     print "Starting database population script"
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'orthotics_project.settings')
     # from app.models import <model>, <model>
+    from django.contrib.auth.models import User
     from clients.models import Client, Perscription, Insurance, Claim
     populate()
     print "Done populating database"
