@@ -24,3 +24,10 @@ If you add .pyc files by accident this gets rid of them:
 
 Problems with regular expressions? Here try this:
 *   http://www.cheatography.com/davechild/cheat-sheets/regular-expressions/
+
+Themes
+======
+Using free bootstrap themes from http://bootswatch.com
+*   http://bootswatch.com/cerulean/
+*   http://bootswatch.com/lumen/
+*   http://bootswatch.com/yeti/
