@@ -31,6 +31,7 @@ Using free bootstrap themes from http://bootswatch.com
 *   http://bootswatch.com/cerulean/
 *   http://bootswatch.com/lumen/
 *   http://bootswatch.com/yeti/
+
 Good resources:
 *   http://getbootstrap.com/
 *   http://www.tutorialspoint.com/bootstrap/
