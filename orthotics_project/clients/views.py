@@ -9,4 +9,8 @@ def index(request):
     client_list = Client.objects.all()
     client_dict = {'clients': client_list}
 
-    return render_to_response('clients/template1.html', client_dict, context)
+    return render_to_response('clients/index.html', client_dict, context)
+
+
+def clientView(request, client_id):
+    return HttpResponse("Welcome to this client's page")

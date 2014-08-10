@@ -9,7 +9,7 @@
         {% if clients %}
             <ul>
                 {% for client in clients %}
-                <li>{{client.firstName}}</li>
+                <h3><a href="/clients/{{client.id}}">{{client.firstName}} {{client.lastName}}</a></h3>
                 {% endfor %}
             </ul>
         {% else %}
