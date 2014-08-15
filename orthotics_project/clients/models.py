@@ -10,6 +10,41 @@ The following tables will be contained within:
 from django.db import models
 
 
+class Dependant(models.Model):
+
+    """Model of a clients dependants.
+
+   Fields:
+   Relationship (spouse, son, daughter)
+   Birthdate
+   Sex
+
+   * Each client will have a list of dependents that they are associate with.
+
+    """
+    SPOUSE = 'Spouse'
+    CHILD = 'Child'
+    RELATIONSHIP_CHOICES = ((SPOUSE, 'Spouse'),
+                            (CHILD, 'Child'))
+
+    MALE = 'M'
+    FEMALE = 'F'
+    GENDER_CHOICES = ((MALE, 'Male'),
+                      (FEMALE, 'Female'))
+
+    firstName = models.CharField(max_length=128)
+    lastName = models.CharField(max_length=128)
+    relationship = models.CharField(max_length=6, choices=RELATIONSHIP_CHOICES)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    birthdate = models.DateField()
+
+    def __unicode__(self):
+        return "%s - %s" % (self.firstName, self.lastName)
+
+    def __str__(self):
+        return self.__unicode__()
+
+
 class Client(models.Model):
 
     """Model of a client.
@@ -64,42 +99,6 @@ class Client(models.Model):
     def getAge(self):
         """Calculate clients age in years."""
         pass
-
-
-class Dependant(models.Model):
-
-    """Model of a clients dependants.
-
-   Fields:
-   Relationship (spouse, son, daughter)
-   Birthdate
-   Sex
-
-   * Each client will have a list of dependents that they are associate with.
-
-    """
-    SPOUSE = 'Spouse'
-    CHILD = 'Child'
-    RELATIONSHIP_CHOICES = ((SPOUSE, 'Spouse'),
-                            (CHILD, 'Child'))
-
-    MALE = 'M'
-    FEMALE = 'F'
-    GENDER_CHOICES = ((MALE, 'Male'),
-                      (FEMALE, 'Female'))
-
-    firstName = models.CharField(max_length=128)
-    lastName = models.CharField(max_length=128)
-    relationship = models.CharField(max_length=6, choices=RELATIONSHIP_CHOICES)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    birthdate = models.DateField()
-
-    def __unicode__(self):
-        return "%s - %s" % (self.firstName, self.lastName)
-
-    def __str__(self):
-        return self.__unicode__()
-
 
 
 class Perscription(models.Model):
@@ -205,4 +204,3 @@ class Claim(models.Model):
 
     def __str__(self):
         return self.__unicode__()
-
