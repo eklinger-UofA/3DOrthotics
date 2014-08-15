@@ -48,11 +48,12 @@ class Client(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     credit = models.SmallIntegerField(default=0)
     notes = models.TextField(blank=True, default="")
-    # insurance (foreign key)
-    # dependants (foreign key)
-    # Perscriptions (foreign key)
-    # invoices (foreign key)
-    # claims (foreign key)
+    # Foreign key relationships
+    # insurance (foreign key on other table)
+    # Perscriptions (foreign key on other table)
+    # invoices (foreign key on other table)
+    # claims (foreign key on other table)
+    depandants = models.ManyToManyField(Dependant)
 
     def __unicode__(self):
         return "%s - %s" % (self.firstName, self.lastName)
@@ -87,12 +88,17 @@ class Dependant(models.Model):
     GENDER_CHOICES = ((MALE, 'Male'),
                       (FEMALE, 'Female'))
 
-
     firstName = models.CharField(max_length=128)
     lastName = models.CharField(max_length=128)
     relationship = models.CharField(max_length=6, choices=RELATIONSHIP_CHOICES)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     birthdate = models.DateField()
+
+    def __unicode__(self):
+        return "%s - %s" % (self.firstName, self.lastName)
+
+    def __str__(self):
+        return self.__unicode__()
 
 
 
@@ -193,3 +199,10 @@ class Claim(models.Model):
     # TODO validate based on clients insurance, amount left in coverage and coverage percent
     expectedBack = models.IntegerField(blank=True, default=0)
     paymentType = models.CharField(max_length=6, choices=PAYMENT_CHOICES)
+
+    def __unicode__(self):
+        return "Claim - %s %s" % (self.client.firstName, self.client.lastName)
+
+    def __str__(self):
+        return self.__unicode__()
+
