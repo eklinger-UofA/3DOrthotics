@@ -45,11 +45,13 @@ def populate():
     add_claim(john, john_insurance, timezone.now(), CASH)
 
     # Add admin users
-    add_admin("admin", "admin")
-    add_admin("jay", "admin")
-    add_admin("dan", "admin")
-    add_admin("eric", "admin")
-    add_admin("chris", "admin")
+    # Have to hash passwords so get_or_create will work
+    password = hashers.make_password("admin")
+    add_admin("admin", password)
+    add_admin("jay", password)
+    add_admin("dan", password)
+    add_admin("eric", password)
+    add_admin("chris", password)
 
 
 def add_model_example():
@@ -103,6 +105,7 @@ if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'orthotics_project.settings')
     # from app.models import <model>, <model>
     from django.contrib.auth.models import User
-    from clients.models import Client, Perscription, Insurance, Claim
+    import django.contrib.auth.hashers as hashers
+    from clients.models import Client, Perscription, Insurance, Claim, Dependant
     populate()
     print "Done populating database"
