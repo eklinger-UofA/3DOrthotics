@@ -16,6 +16,8 @@ def clientView(request, client_id):
     context = RequestContext(request)
 
     client = Client.objects.get(id=client_id)
-    context_dict = {'client': client}
+    insurance = client.insurance_set.all()
 
+    context_dict = {'client': client,
+                    'client_insurance': insurance}
     return render_to_response('clients/client.html', context_dict, context)
