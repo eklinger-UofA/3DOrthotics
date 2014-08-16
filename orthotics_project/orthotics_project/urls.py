@@ -10,7 +10,8 @@ urlpatterns = \
              # url(r'^$', 'orthotics_project.views.home', name='home'),
              # url(r'^blog/', include('blog.urls')),
 
+             url(r'^$', 'orthotics_project.views.index', name='index'),
              url(r'^admin/', include(admin.site.urls)),
              url(r'^clients/', include('clients.urls')),
-             url(r'^$', 'orthotics_project.views.index', name='index')
+             url(r'^inventory/', include('inventory.urls')),
              )
