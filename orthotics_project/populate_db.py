@@ -23,14 +23,15 @@ def populate():
     # Add Dependants
     kid_one = add_dependent("Kid", "one", CHILD, MALE, datetime.date(1999, 1, 1))
     kid_two = add_dependent("Kid", "two", CHILD, FEMALE, datetime.date(2001, 1, 1))
+    wife = add_dependent("Jane", "Doe", SPOUSE, FEMALE, datetime.date(1985, 12, 8))
     eric.dependents.add(kid_one)
+    eric.dependents.add(kid_two)
+    eric.dependents.add(wife)
 
     # Constants for claim model
     CASH = Claim.PAYMENT_CHOICES[0][0]
-    # Constants for coverage model
-    DIRECT = Coverage.BILLING_CHOICES[0][0]
-    INDIRECT = Coverage.BILLING_CHOICES[1][0]
-    # Add/create models here
+
+    # Add prescriptions
     add_prescription(eric, timezone.now())
     add_prescription(eric, timezone.now())
     add_prescription(chris, timezone.now())
@@ -42,6 +43,8 @@ def populate():
     add_prescription(cloney, timezone.now())
     add_prescription(jane, timezone.now())
     add_prescription(john, timezone.now())
+
+    # Add insurance
     eric_insurance = add_insurance(eric, "Some_provider", "PN9999", "CN9999", 50)
     chris_insurance = add_insurance(chris, "Some_provider", "PN9998", "CN9998", 50)
     jay_insurance = add_insurance(jay, "Some_provider", "PN9997", "CN9997", 50)
@@ -49,6 +52,14 @@ def populate():
     cloney_insurance = add_insurance(cloney, "Some_provider", "PN9995", "CN9995", 50)
     jane_insurance = add_insurance(jane, "Some_provider", "PN9994", "CN9994", 50)
     john_insurance = add_insurance(john, "Some_provider", "PN9994", "CN9994", 50)
+
+    # Constants for coverage model
+    DIRECT = Coverage.BILLING_CHOICES[0][0]
+    INDIRECT = Coverage.BILLING_CHOICES[1][0]
+    # Add coverages
+    eric_coverage = add_coverage(eric_insurance, 10000, 100, 50, DIRECT, datetime.date(2015, 1, 1))
+
+    # Add claims
     add_claim(eric, eric_insurance, timezone.now(), CASH)
     add_claim(chris, chris_insurance, timezone.now(), CASH)
     add_claim(jay, jay_insurance, timezone.now(), CASH)
@@ -131,6 +142,7 @@ def add_coverage(insurance, maxCoverage, totalClaimed, coveragePercent, billing,
                                        maxCoverage=maxCoverage,
                                        totalClaimed=totalClaimed,
                                        coverageRemaining=coverageRemaining,
+                                       coveragePercent=coveragePercent,
                                        billing=billing,
                                        rollOverDate=rollOverDate)
     return c[0]
