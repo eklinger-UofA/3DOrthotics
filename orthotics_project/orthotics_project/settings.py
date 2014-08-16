@@ -93,6 +93,6 @@ STATIC_URL = '/static/'
 
 # TODO add this back, just missing the location of default django static files
 # makes the admin page look crappy if this is included now
-#STATICFILES_DIRS = (
-#    STATIC_PATH
-#)
+STATICFILES_DIRS = (
+    STATIC_PATH,
+)

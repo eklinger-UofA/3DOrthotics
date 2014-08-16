@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Clients</title>
-    </head>
+{% extends 'base.html' %}
 
-    <body>
-        <h1>Clients</h1>
-        {% if clients %}
+{% block title %}Clients{% endblock %}
+
+{% block content %}
+    <h1>Clients</h1>
+    {% if clients %}
+        <ul>
+            {% for client in clients %}
+            <h3><a href="/clients/{{client.id}}">{{client.firstName}} {{client.lastName}}</a></h3>
             <ul>
-                {% for client in clients %}
-                <h3><a href="/clients/{{client.id}}">{{client.firstName}} {{client.lastName}}</a></h3>
-                <ul>
-                    <li>{{client.address}}</li>
-                    <li>{{client.birthdate}}</li>
-                </ul>
-                {% endfor %}
+                <li>{{client.address}}</li>
+                <li>{{client.birthdate}}</li>
             </ul>
-        {% else %}
-            <p> There is no client information </p>
-        {% endif %}
-    </body>
-</html>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p> There is no client information </p>
+    {% endif %}
+{% endblock %}
