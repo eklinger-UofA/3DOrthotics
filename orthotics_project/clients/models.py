@@ -27,10 +27,10 @@ class Dependent(models.Model):
     RELATIONSHIP_CHOICES = ((SPOUSE, 'Spouse'),
                             (CHILD, 'Child'))
 
-    MALE = 'M'
-    FEMALE = 'F'
-    GENDER_CHOICES = ((MALE, 'Male'),
-                      (FEMALE, 'Female'))
+    MALE = 'Male'
+    FEMALE = 'Female'
+    GENDER_CHOICES = ((MALE, 'M'),
+                      (FEMALE, 'F'))
 
     firstName = models.CharField(max_length=128)
     lastName = models.CharField(max_length=128)
@@ -66,10 +66,10 @@ class Client(models.Model):
 
     """
 
-    MALE = 'M'
-    FEMALE = 'F'
-    GENDER_CHOICES = ((MALE, 'Male'),
-                      (FEMALE, 'Female'))
+    MALE = 'Male'
+    FEMALE = 'Female'
+    GENDER_CHOICES = ((MALE, 'M'),
+                      (FEMALE, 'F'))
 
     firstName = models.CharField(max_length=128)
     lastName = models.CharField(max_length=128)

@@ -8,12 +8,7 @@ def populate():
     # Constants for the client model
     MALE = Client.GENDER_CHOICES[0][0]
     FEMALE = Client.GENDER_CHOICES[1][0]
-    # Constants for claim model
-    CASH = Claim.PAYMENT_CHOICES[0][0]
-    # Constants for coverage model
-    DIRECT = Coverage.BILLING_CHOICES[0][0]
-    INDIRECT = Coverage.BILLING_CHOICES[1][0]
-    # Add/create models here
+    # Add Clients
     eric = add_client("Eric", "Klinger", "11408 44 ave", datetime.date(1988, 12, 30), MALE)
     chris = add_client("Chris", "Klinger", "11408 44 ave", datetime.date(1991, 6, 14), MALE)
     jay = add_client("Jason", "Mu", "4077 69ave", datetime.date(1980, 6, 14), MALE)
@@ -21,6 +16,21 @@ def populate():
     cloney = add_client("Cloney", "McStudent", "12345 42 ave", datetime.date(1993, 5, 22), MALE)
     jane = add_client("Jane", "Doe", "2943 69 ave", datetime.date(1985, 12, 8), FEMALE)
     john = add_client("John", "Doe", "2943 69 ave", datetime.date(1984, 8, 20), MALE)
+
+    # Constants for Dependent model
+    SPOUSE = Dependent.RELATIONSHIP_CHOICES[0][0]
+    CHILD = Dependent.RELATIONSHIP_CHOICES[1][0]
+    # Add Dependants
+    kid_one = add_dependent("Kid", "one", CHILD, MALE, datetime.date(1999, 1, 1))
+    kid_two = add_dependent("Kid", "two", CHILD, FEMALE, datetime.date(2001, 1, 1))
+    eric.dependents.add(kid_one)
+
+    # Constants for claim model
+    CASH = Claim.PAYMENT_CHOICES[0][0]
+    # Constants for coverage model
+    DIRECT = Coverage.BILLING_CHOICES[0][0]
+    INDIRECT = Coverage.BILLING_CHOICES[1][0]
+    # Add/create models here
     add_prescription(eric, timezone.now())
     add_prescription(eric, timezone.now())
     add_prescription(chris, timezone.now())
@@ -81,6 +91,15 @@ def add_client(firstName, lastName, address, birthdate, gender):
                                      birthdate=birthdate,
                                      gender=gender)
     return c[0]
+
+
+def add_dependent(firstName, lastName, relationship, gender, birthdate):
+    d = Dependent.objects.get_or_create(firstName=firstName,
+                                        lastName=lastName,
+                                        relationship=relationship,
+                                        gender=gender,
+                                        birthdate=birthdate)
+    return d[0]
 
 
 def add_prescription(client, dateAdded):
