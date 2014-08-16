@@ -5,9 +5,26 @@
 {% block title %}{{client.firstName}} {{client.lastName}}{% endblock %}
 
 {% block content %}
-    <h1>{{client.firstName}} {{client.lastName}}</h1>
-    <ul>
-        <li>{{client.address}}</li>
-        <li>{{client.birthdate}}</li>
+    <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+        <li class="active"><a href="#info" data-toggle="tab">Information</a></li>
+        <li class=""><a href="#dependents" data-toggle="tab">Dependents</a></li>
+        <li><a href="#insurance" data-toggle="tab">Insurance</a></li>
     </ul>
+
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="info">
+            <h1>{{client.firstName}} {{client.lastName}}</h1>
+            <ul>
+                <li>{{client.address}}</li>
+                <li>{{client.birthdate}}</li>
+            </ul>
+        </div>
+        <div class="tab-pane fade" id="dependents">
+            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+        </div>
+        <div class="tab-pane fade" id="insurance">
+            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
+        </div>
+    </div>
 {% endblock %}
+
