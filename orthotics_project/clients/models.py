@@ -88,7 +88,7 @@ class Client(models.Model):
     # Perscriptions (foreign key on other table)
     # invoices (foreign key on other table)
     # claims (foreign key on other table)
-    depandants = models.ManyToManyField(Dependant)
+    dependants = models.ManyToManyField(Dependant)
 
     def __unicode__(self):
         return "%s - %s" % (self.firstName, self.lastName)
