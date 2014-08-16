@@ -10,9 +10,9 @@ The following tables will be contained within:
 from django.db import models
 
 
-class Dependant(models.Model):
+class Dependent(models.Model):
 
-    """Model of a clients dependants.
+    """Model of a clients dependents.
 
    Fields:
    Relationship (spouse, son, daughter)
@@ -60,7 +60,7 @@ class Client(models.Model):
     Gender
     Credit (current credit from insurance company)
     Notes (for log of communication)
-    Dependants - another table
+    Dependents - another table
     Prescriptions - another table
     Insurance - another table
 
@@ -85,10 +85,10 @@ class Client(models.Model):
     notes = models.TextField(blank=True, default="")
     # Foreign key relationships
     # insurance (foreign key on other table)
-    # Perscriptions (foreign key on other table)
+    # Prescriptions (foreign key on other table)
     # invoices (foreign key on other table)
     # claims (foreign key on other table)
-    dependants = models.ManyToManyField(Dependant)
+    dependents = models.ManyToManyField(Dependent)
 
     def __unicode__(self):
         return "%s - %s" % (self.firstName, self.lastName)
@@ -101,11 +101,11 @@ class Client(models.Model):
         pass
 
 
-class Perscription(models.Model):
+class Prescription(models.Model):
 
-    """Model of a saved perscription file.
+    """Model of a saved prescription file.
 
-    A perscription will have the following fields:
+    A prescription will have the following fields:
     Client
     Date added
     Prescription image
@@ -117,12 +117,12 @@ class Perscription(models.Model):
 
     client = models.ForeignKey(Client)
     dateAdded = models.DateTimeField(auto_now_add=True)
-    # TODO file field for uploading and saving the perscription, optional for now
+    # TODO file field for uploading and saving the prescription, optional for now
 
     def __unicode__(self):
         clientName = self.client.firstName + " " + self.client.lastName
         date = self.dateAdded.date().isoformat()
-        return "Perscription - %s - %s" % (clientName, date)
+        return "Prescription - %s - %s" % (clientName, date)
 
     def __str__(self):
         return self.__unicode__()
@@ -175,7 +175,7 @@ class Claim(models.Model):
     Submitted date
     invoice date
     paid date
-    client/dependant
+    client/dependent
     insurance
     amount claimed
     expected back
@@ -215,7 +215,7 @@ class Coverage(models.Model):
 
     1) Some plans have a pool for coverage, say $10,000 for everything per
     year per person under the insurance plan. This includes primaries
-    and dependants.
+    and dependents.
 
     EX. $10,000 can be used for eveything, dental, orthotics, hospital etc.
     Once you go over that $10,000 nothing else is covered
@@ -228,7 +228,7 @@ class Coverage(models.Model):
     as normal
 
     2) More common are plans as follows. The client has a max for each expense,
-    normally covering themselves and dependants.
+    normally covering themselves and dependents.
 
     EX. Dental will have $500 per year, orthotics will have $300 max every three years.
 

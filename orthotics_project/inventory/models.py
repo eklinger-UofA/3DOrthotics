@@ -22,7 +22,7 @@ Saved invoices
 Table: Orders
 Fields:
 Order type (orthotics, shoes, etc)
-Client (or their dependant)
+Client (or their dependent)
 order date
 arrival date
 dispensing date

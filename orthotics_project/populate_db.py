@@ -21,17 +21,17 @@ def populate():
     cloney = add_client("Cloney", "McStudent", "12345 42 ave", datetime.date(1993, 5, 22), MALE)
     jane = add_client("Jane", "Doe", "2943 69 ave", datetime.date(1985, 12, 8), FEMALE)
     john = add_client("John", "Doe", "2943 69 ave", datetime.date(1984, 8, 20), MALE)
-    add_perscription(eric, timezone.now())
-    add_perscription(eric, timezone.now())
-    add_perscription(chris, timezone.now())
-    add_perscription(chris, timezone.now())
-    add_perscription(jay, timezone.now())
-    add_perscription(jay, timezone.now())
-    add_perscription(dan, timezone.now())
-    add_perscription(dan, timezone.now())
-    add_perscription(cloney, timezone.now())
-    add_perscription(jane, timezone.now())
-    add_perscription(john, timezone.now())
+    add_prescription(eric, timezone.now())
+    add_prescription(eric, timezone.now())
+    add_prescription(chris, timezone.now())
+    add_prescription(chris, timezone.now())
+    add_prescription(jay, timezone.now())
+    add_prescription(jay, timezone.now())
+    add_prescription(dan, timezone.now())
+    add_prescription(dan, timezone.now())
+    add_prescription(cloney, timezone.now())
+    add_prescription(jane, timezone.now())
+    add_prescription(john, timezone.now())
     eric_insurance = add_insurance(eric, "Some_provider", "PN9999", "CN9999", 50)
     chris_insurance = add_insurance(chris, "Some_provider", "PN9998", "CN9998", 50)
     jay_insurance = add_insurance(jay, "Some_provider", "PN9997", "CN9997", 50)
@@ -83,8 +83,8 @@ def add_client(firstName, lastName, address, birthdate, gender):
     return c[0]
 
 
-def add_perscription(client, dateAdded):
-    p = Perscription.objects.get_or_create(client=client,
+def add_prescription(client, dateAdded):
+    p = Prescription.objects.get_or_create(client=client,
                                            dateAdded=dateAdded)
     return p[0]
 
@@ -124,7 +124,7 @@ if __name__ == '__main__':
     # from app.models import <model>, <model>
     from django.contrib.auth.models import User
     import django.contrib.auth.hashers as hashers
-    from clients.models import Client, Perscription, Insurance, Claim, \
-    Dependant, Coverage
+    from clients.models import Client, Prescription, Insurance, Claim, \
+    Dependent, Coverage
     populate()
     print "Done populating database"
