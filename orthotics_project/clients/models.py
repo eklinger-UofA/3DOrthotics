@@ -156,8 +156,8 @@ class Insurance(models.Model):
     policyNumber = models.CharField(max_length=128)
     contractNumber = models.CharField(max_length=128)
     coveragePercent = models.IntegerField()
-    coverageMax = models.IntegerField(blank=True, default=0)
-    coverageRemaining = models.IntegerField(blank=True, default=0)
+    #coverageMax = models.IntegerField(blank=True, default=0)
+    #coverageRemaining = models.IntegerField(blank=True, default=0)
 
     def __unicode__(self):
         clientName = self.client.firstName + " " + self.client.lastName
@@ -201,6 +201,70 @@ class Claim(models.Model):
 
     def __unicode__(self):
         return "Claim - %s %s" % (self.client.firstName, self.client.lastName)
+
+    def __str__(self):
+        return self.__unicode__()
+
+
+class Coverage(models.Model):
+
+    """Model of a clients coverage.
+
+    This is meant to cover most of the cases of how coverage would work.
+    Following are some examples:
+
+    1) Some plans have a pool for coverage, say $10,000 for everything per
+    year per person under the insurance plan. This includes primaries
+    and dependants.
+
+    EX. $10,000 can be used for eveything, dental, orthotics, hospital etc.
+    Once you go over that $10,000 nothing else is covered
+
+    Modeling:
+    Have the total coverage amount, amount remaining of that total, amount
+    we have claimed against it. Coverage % would likely be 100% until that
+    limit is reached and then the coverage % won't be considered. Billing
+    can still be of certain types and the roll-over timeframe can be set
+    as normal
+
+    2) More common are plans as follows. The client has a max for each expense,
+    normally covering themselves and dependants.
+
+    EX. Dental will have $500 per year, orthotics will have $300 max every three years.
+
+    Modeling:
+    Have the total coverage amount, amount remaining and amount claimed. The
+    calc for amount remaining should be as easy as taking the total and minus
+    the amount claimed. However this may change if they go elsewhere for something
+    that is covered elsewhere and then comes back to us. The amount remaining then
+    should be dynamic and calculated separately from our numbers. (Have to ask Danny)
+    Coverage % may be different for each plan, say some will be 50%, others 100% and
+    will obviously drop to 0% once the coverage is used during the roll-over timeframe.
+
+    Fields:
+    max coverage
+    total claimed
+    total remaining
+    coverage %
+    billing type (direct, indirect)
+    roll over timeframe (selected as years or date, saved as a date)
+    coverage exceeded
+
+    """
+    BILLING_CHOICES = (("DIRECT", "Direct"),
+                       ("INDIRECT", "Indirect"))
+
+    insurance = models.ForeignKey(Insurance)
+    maxCoverage = models.IntegerField()
+    totalClaimed = models.IntegerField()
+    coverageRemaining = models.IntegerField()
+    coveragePercent = models.IntegerField()
+    billing = models.CharField(max_length=8, choices=BILLING_CHOICES)
+    rollOverData = models.DateField()
+
+    def __unicode__(self):
+        clientName = self.insurance.client.firstName + " " + self.insurance.client.lastName
+        return clientName + " - " + self.insurance.provider + ": " + str(self.coverageRemaining)
 
     def __str__(self):
         return self.__unicode__()
