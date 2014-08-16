@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Client:{{client.id}}</title>
-    </head>
+{% extends 'base.html' %}
+{% include 'navbar.html' %}
 
-    <body>
-        <h1>{{client.firstName}} {{client.lastName}}</h1>
-        <ul>
-            <li>{{client.address}}</li>
-            <li>{{client.birthdate}}</li>
-        </ul>
-    </body>
-</html>
+{% block title %}{{client.firstName}} {{client.lastName}}{% endblock %}
+
+{% block content %}
+    <h1>{{client.firstName}} {{client.lastName}}</h1>
+    <ul>
+        <li>{{client.address}}</li>
+        <li>{{client.birthdate}}</li>
+    </ul>
+{% endblock %}
