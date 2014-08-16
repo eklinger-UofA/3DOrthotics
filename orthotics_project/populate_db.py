@@ -10,6 +10,9 @@ def populate():
     FEMALE = Client.GENDER_CHOICES[1][0]
     # Constants for claim model
     CASH = Claim.PAYMENT_CHOICES[0][0]
+    # Constants for coverage model
+    DIRECT = Coverage.BILLING_CHOICES[0][0]
+    INDIRECT = Coverage.BILLING_CHOICES[1][0]
     # Add/create models here
     eric = add_client("Eric", "Klinger", "11408 44 ave", datetime.date(1988, 12, 30), MALE)
     chris = add_client("Chris", "Klinger", "11408 44 ave", datetime.date(1991, 6, 14), MALE)
@@ -60,11 +63,15 @@ def add_model_example():
 
 
 def add_admin(username, password):
-    a = User.objects.get_or_create(username=username,
-                                   password=password,
-                                   is_staff=True,
-                                   is_superuser=True)
-    return a[0]
+    # Need to try and return here since django admin users are dumb
+    try:
+        a = User.objects.get_or_create(username=username,
+                                       password=password,
+                                       is_staff=True,
+                                       is_superuser=True)
+        return a[0]
+    except:
+        return
 
 
 def add_client(firstName, lastName, address, birthdate, gender):
@@ -99,6 +106,17 @@ def add_claim(client, insurance, submittedDate, paymentType):
     return c[0]
 
 
+def add_coverage(insurance, maxCoverage, totalClaimed, coveragePercent, billing, rollOverDate):
+    coverageRemaining = maxCoverage - totalClaimed
+    c = Coverage.objects.get_or_create(insurance=insurance,
+                                       maxCoverage=maxCoverage,
+                                       totalClaimed=totalClaimed,
+                                       coverageRemaining=coverageRemaining,
+                                       billing=billing,
+                                       rollOverDate=rollOverDate)
+    return c[0]
+
+
 # Start execution here!
 if __name__ == '__main__':
     print "Starting database population script"
@@ -106,6 +124,7 @@ if __name__ == '__main__':
     # from app.models import <model>, <model>
     from django.contrib.auth.models import User
     import django.contrib.auth.hashers as hashers
-    from clients.models import Client, Perscription, Insurance, Claim, Dependant
+    from clients.models import Client, Perscription, Insurance, Claim, \
+    Dependant, Coverage
     populate()
     print "Done populating database"

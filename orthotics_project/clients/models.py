@@ -260,7 +260,7 @@ class Coverage(models.Model):
     coverageRemaining = models.IntegerField()
     coveragePercent = models.IntegerField()
     billing = models.CharField(max_length=8, choices=BILLING_CHOICES)
-    rollOverData = models.DateField()
+    rollOverDate = models.DateField()
 
     def __unicode__(self):
         clientName = self.insurance.client.firstName + " " + self.insurance.client.lastName
