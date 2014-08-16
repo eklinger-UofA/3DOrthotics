@@ -12,4 +12,5 @@ urlpatterns = \
 
              url(r'^admin/', include(admin.site.urls)),
              url(r'^clients/', include('clients.urls')),
+             url(r'^$', 'orthotics_project.views.index', name='index')
              )
